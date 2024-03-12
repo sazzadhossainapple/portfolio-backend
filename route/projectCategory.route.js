@@ -10,6 +10,6 @@ const { index, store, destroy, update, getBySlug } = projectCategoryCotroller;
 
 router.route('/').get(index).post(auth, store);
 
-router.route('/:id').get(getBySlug).put(auth, update).delete(auth, destroy);
+router.route('/:id').get(getBySlug).patch(auth, update).delete(auth, destroy);
 
 module.exports = router;

@@ -18,7 +18,7 @@ const {
  * @returns
  */
 const index = asyncWrapper(async (req, res, next) => {
-    const category = await getAllProject({});
+    const category = await getAllProject();
     res.success(category, 'Project category successfully');
 });
 
@@ -73,10 +73,10 @@ const getBySlug = asyncWrapper(async (req, res, next) => {
 
 const update = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const { title } = req.body;
+    const { title, status } = req.body;
     const slug = title.toLowerCase().replace(/\s+/g, '-');
 
-    const updateData = { title, slug };
+    const updateData = { title, status, slug };
 
     const result = await updateCategory(id, updateData);
 
