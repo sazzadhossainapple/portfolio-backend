@@ -6,12 +6,12 @@ const app = require('./app');
 
 // database connection
 
-// DATABASE_Development = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.lr8cjgc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+DATABASE_Development = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.kqw4pwk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
 
 const connectDB = async () => {
     try {
         await mongoose
-            .connect(process.env.DATABASE_LOCAL)
+            .connect(DATABASE_Development)
             .then(() => {
                 console.log(`Database connection is successful`.red.bold);
             })
