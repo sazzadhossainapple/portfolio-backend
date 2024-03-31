@@ -23,6 +23,21 @@ const index = asyncWrapper(async (req, res, next) => {
 });
 
 /**
+ * get all category
+ *
+ * URI: /api/project-category/status
+ *
+ * @param {req} req
+ * @param {res} res
+ * @param {next} next
+ * @returns
+ */
+const indexStatus = asyncWrapper(async (req, res, next) => {
+    const category = await getAllProject({ status: true });
+    res.success(category, 'Project category successfully');
+});
+
+/**
  * create project category
  *
  * URI: /api/project-category
@@ -35,17 +50,22 @@ const index = asyncWrapper(async (req, res, next) => {
 
 const store = asyncWrapper(async (req, res, next) => {
     const { title } = req.body;
-    const slug = title.toLowerCase().replace(/\s+/g, '-');
 
-    const category = await createProject({ title, slug });
+    const slug = title.toLowerCase().replace(/\s+/g, '-');
+    const newData = {
+        title,
+        slug,
+    };
+
+    const category = await createProject(newData);
 
     res.success(category, 'Project create succssfully');
 });
 
 /**
- * get by user email
+ * get by user id
  *
- * URI: /api/users/:email
+ * URI: /api/users/:id
  *
  * @param {req} req
  * @param {res} res
@@ -109,4 +129,5 @@ module.exports = {
     destroy,
     update,
     getBySlug,
+    indexStatus,
 };

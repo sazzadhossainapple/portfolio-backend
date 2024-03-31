@@ -134,11 +134,12 @@ const update = asyncWrapper(async (req, res, next) => {
         github_server,
         live_link,
         image,
+        status,
     } = req.body;
 
     const slug = title.toLowerCase().replace(/\s+/g, '-');
 
-    const updateData = await createProjectName({
+    const updateData = {
         category_id,
         title,
         description,
@@ -146,8 +147,9 @@ const update = asyncWrapper(async (req, res, next) => {
         github_server,
         live_link,
         image,
+        status,
         slug,
-    });
+    };
 
     const result = await updateProjectName(id, updateData);
 
