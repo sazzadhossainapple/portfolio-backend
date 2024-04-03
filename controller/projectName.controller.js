@@ -32,10 +32,10 @@ const index = asyncWrapper(async (req, res, next) => {
             queries.fields = fields;
         }
 
-        /* Search on the  of office Category of branchName */
-        // if (req.query.branchName) {
-        //     queries.branchName = new RegExp(queries.branchName, 'i');
-        // }
+        /* Search on the  of office Category of category_id */
+        if (req.query.category_id) {
+            queries.category_id = new RegExp(queries.category_id, 'i');
+        }
 
         if (req.query.page) {
             const { page = 1, limit = 6 } = req.query;
