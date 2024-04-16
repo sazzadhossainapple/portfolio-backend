@@ -6,6 +6,7 @@ const projectCategoryRoute = require('./projectCategory.route');
 const projectNameRoute = require('./projectName.route');
 const resumeRoute = require('./resume.route');
 const experienceRoute = require('./experience.route');
+const experienceProfileRoute = require('./experienceProfile.route');
 
 const routes = [
     { path: '/users', handler: userRoute },
@@ -13,6 +14,7 @@ const routes = [
     { path: '/project-name', handler: projectNameRoute },
     { path: '/resume', handler: resumeRoute },
     { path: '/experience', handler: experienceRoute },
+    { path: '/experience-profile', handler: experienceProfileRoute },
 ];
 
 routes.map((route) => router.use(route?.path, route?.handler));
