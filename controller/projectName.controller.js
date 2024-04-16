@@ -37,6 +37,11 @@ const index = asyncWrapper(async (req, res, next) => {
             queries.category_id = new RegExp(queries.category_id, 'i');
         }
 
+        /* Search on the  of status is true */
+        if (req.query.status) {
+            queries.status = new RegExp(queries.status, 'i');
+        }
+
         if (req.query.page) {
             const { page = 1, limit = 6 } = req.query;
             const skip = (page - 1) * parseInt(limit);
