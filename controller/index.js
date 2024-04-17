@@ -4,6 +4,7 @@ const projectNameCotroller = require('./projectName.controller');
 const resumeCotroller = require('./resume.controller');
 const experienceCotroller = require('./experience.controller');
 const experienceProfileCotroller = require('./experienceProfile.controller');
+const achievementsCertificationsCotroller = require('./achievementsCertifications.controller');
 
 const controllers = {
     userController: userController,
@@ -12,6 +13,7 @@ const controllers = {
     resumeCotroller: resumeCotroller,
     experienceCotroller: experienceCotroller,
     experienceProfileCotroller: experienceProfileCotroller,
+    achievementsCertificationsCotroller: achievementsCertificationsCotroller,
 };
 
 module.exports = controllers;

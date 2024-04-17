@@ -7,7 +7,7 @@ const errorLogger = (uri) =>
         transports: [
             new winston.transports.Console(),
             new winston.transports.DailyRotateFile({
-                filename: 'portfolio-backend/log/log-error-%DATE%.log',
+                filename: 'log/log-error-%DATE%.log',
                 datePattern: 'yyyy-MM-DD-HH',
             }),
         ],

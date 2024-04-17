@@ -4,7 +4,7 @@ const cors = require('cors');
 const configureRoutes = require('./route');
 const handleErrors = require('./middleware/error');
 const { apiResponse } = require('./middleware');
-// const errorLogger = require('./logger');
+const errorLogger = require('./logger');
 const handleRequest = require('./middleware/handleRequest');
 
 //middlewares
