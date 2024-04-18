@@ -8,6 +8,8 @@ const resumeRoute = require('./resume.route');
 const experienceRoute = require('./experience.route');
 const experienceProfileRoute = require('./experienceProfile.route');
 const achievementsCertificationsRoute = require('./achievementsCertifications.route');
+const aboutMeRoute = require('./aboutMe.route');
+const blogRoute = require('./blog.route');
 
 const routes = [
     { path: '/users', handler: userRoute },
@@ -17,6 +19,8 @@ const routes = [
     { path: '/experience', handler: experienceRoute },
     { path: '/experience-profile', handler: experienceProfileRoute },
     { path: '/acehivement', handler: achievementsCertificationsRoute },
+    { path: '/about-me', handler: aboutMeRoute },
+    { path: '/blog', handler: blogRoute },
 ];
 
 routes.map((route) => router.use(route?.path, route?.handler));

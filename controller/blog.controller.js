@@ -1,16 +1,16 @@
 const asyncWrapper = require('../middleware/asyncWrapper');
 const {
-    getAllAchievementsCertifications,
-    createAchievementsCertifications,
-    findAchievementsCertificationsBySlug,
-    updateAchievementsCertifications,
-    deleteAchievementsCertifications,
-} = require('../service/achievementsCertifications.service');
+    getAllBlog,
+    createBlog,
+    findBlogBySlug,
+    updateBlog,
+    deleteBlog,
+} = require('../service/blog.service');
 
 /**
- * get all Achievements Certifications
+ * get all blog
  *
- * URI: /api/acehivement
+ * URI: /api/blog
  *
  * @param {req} req
  * @param {res} res
@@ -39,10 +39,10 @@ const index = asyncWrapper(async (req, res, next) => {
             queries.limit = parseInt(limit);
         }
 
-        const result = await getAllAchievementsCertifications(filters, queries);
+        const blog = await getAllBlog(filters, queries);
         res.status(200).json({
             status: 'success',
-            data: result,
+            data: blog,
         });
     } catch (error) {
         res.status(400).json({
@@ -54,9 +54,9 @@ const index = asyncWrapper(async (req, res, next) => {
 });
 
 /**
- * create Achievements Certifications
+ * create blog
  *
- * URI: /api/acehivement
+ * URI: /api/blog
  *
  * @param {req} req
  * @param {res} res
@@ -65,22 +65,21 @@ const index = asyncWrapper(async (req, res, next) => {
  */
 
 const store = asyncWrapper(async (req, res, next) => {
-    const { title, company_name, date_range, link } = req.body;
+    const { description, title, img } = req.body;
 
-    const experience = await createAchievementsCertifications({
+    const aboutMe = await createBlog({
+        description,
         title,
-        company_name,
-        date_range,
-        link,
+        img,
     });
 
-    res.success(experience, 'Achievements Certifications create succssfully');
+    res.success(aboutMe, 'Blog create succssfully');
 });
 
 /**
- * get by Achievements Certifications
+ * get by blog
  *
- * URI: /api/acehivement/:id
+ * URI: /api/blog/:id
  *
  * @param {req} req
  * @param {res} res
@@ -90,15 +89,15 @@ const store = asyncWrapper(async (req, res, next) => {
 
 const getBySlug = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const experience = await findAchievementsCertificationsBySlug(id);
+    const result = await findBlogBySlug(id);
 
-    res.success(experience, 'Achievements Certifications successfully');
+    res.success(result, 'Blog successfully');
 });
 
 /**
- * update Achievements Certifications
+ * update blog
  *
- * URI: /api/acehivement/:id
+ * URI: /api/blog/:id
  *
  * @param {req} req
  * @param {res} res
@@ -108,24 +107,23 @@ const getBySlug = asyncWrapper(async (req, res, next) => {
 
 const update = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const { title, company_name, date_range, link } = req.body;
+    const { description, title, img } = req.body;
 
     const updateData = {
+        description,
         title,
-        company_name,
-        date_range,
-        link,
+        img,
     };
 
-    const result = await updateAchievementsCertifications(id, updateData);
+    const result = await updateBlog(id, updateData);
 
-    res.success(result, 'Achievements Certifications update successfully');
+    res.success(result, 'Blog update successfully');
 });
 
 /**
- * delete Achievements Certifications
+ * delete blog
  *
- * URI: /api/acehivement/:id
+ * URI: /api/blog/:id
  *
  * @param {req} req
  * @param {res} res
@@ -134,14 +132,12 @@ const update = asyncWrapper(async (req, res, next) => {
  */
 const destroy = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const result = await deleteAchievementsCertifications(id);
+    const result = await deleteBlog(id);
     if (!result.deletedCount) {
-        throw new GeneralError(
-            "Could't delete the Achievements Certifications"
-        );
+        throw new GeneralError("Could't delete the blog");
     }
 
-    res.success(result, 'Achievements Certifications delete successfully.');
+    res.success(result, 'Blog delete successfully.');
 });
 
 module.exports = {

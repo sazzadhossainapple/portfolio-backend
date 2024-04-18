@@ -1,16 +1,16 @@
 const asyncWrapper = require('../middleware/asyncWrapper');
 const {
-    getAllAchievementsCertifications,
-    createAchievementsCertifications,
-    findAchievementsCertificationsBySlug,
-    updateAchievementsCertifications,
-    deleteAchievementsCertifications,
-} = require('../service/achievementsCertifications.service');
+    getAllAboutMe,
+    createAboutMe,
+    findAboutMeBySlug,
+    updateAboutMe,
+    deleteAboutMe,
+} = require('../service/aboutMe.service');
 
 /**
- * get all Achievements Certifications
+ * get all about me
  *
- * URI: /api/acehivement
+ * URI: /api/about-me
  *
  * @param {req} req
  * @param {res} res
@@ -39,10 +39,10 @@ const index = asyncWrapper(async (req, res, next) => {
             queries.limit = parseInt(limit);
         }
 
-        const result = await getAllAchievementsCertifications(filters, queries);
+        const aboutMe = await getAllAboutMe(filters, queries);
         res.status(200).json({
             status: 'success',
-            data: result,
+            data: aboutMe,
         });
     } catch (error) {
         res.status(400).json({
@@ -54,9 +54,9 @@ const index = asyncWrapper(async (req, res, next) => {
 });
 
 /**
- * create Achievements Certifications
+ * create about me
  *
- * URI: /api/acehivement
+ * URI: /api/about-me
  *
  * @param {req} req
  * @param {res} res
@@ -65,22 +65,22 @@ const index = asyncWrapper(async (req, res, next) => {
  */
 
 const store = asyncWrapper(async (req, res, next) => {
-    const { title, company_name, date_range, link } = req.body;
+    const { description, experience, project, img } = req.body;
 
-    const experience = await createAchievementsCertifications({
-        title,
-        company_name,
-        date_range,
-        link,
+    const aboutMe = await createAboutMe({
+        description,
+        experience,
+        project,
+        img,
     });
 
-    res.success(experience, 'Achievements Certifications create succssfully');
+    res.success(aboutMe, 'About me create succssfully');
 });
 
 /**
- * get by Achievements Certifications
+ * get by about me
  *
- * URI: /api/acehivement/:id
+ * URI: /api/about-me/:id
  *
  * @param {req} req
  * @param {res} res
@@ -90,15 +90,15 @@ const store = asyncWrapper(async (req, res, next) => {
 
 const getBySlug = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const experience = await findAchievementsCertificationsBySlug(id);
+    const result = await findAboutMeBySlug(id);
 
-    res.success(experience, 'Achievements Certifications successfully');
+    res.success(result, 'About me successfully');
 });
 
 /**
- * update Achievements Certifications
+ * update about me
  *
- * URI: /api/acehivement/:id
+ * URI: /api/about-me/:id
  *
  * @param {req} req
  * @param {res} res
@@ -108,24 +108,24 @@ const getBySlug = asyncWrapper(async (req, res, next) => {
 
 const update = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const { title, company_name, date_range, link } = req.body;
+    const { description, experience, project, img } = req.body;
 
     const updateData = {
-        title,
-        company_name,
-        date_range,
-        link,
+        description,
+        experience,
+        project,
+        img,
     };
 
-    const result = await updateAchievementsCertifications(id, updateData);
+    const result = await updateAboutMe(id, updateData);
 
-    res.success(result, 'Achievements Certifications update successfully');
+    res.success(result, 'About me update successfully');
 });
 
 /**
- * delete Achievements Certifications
+ * delete about me
  *
- * URI: /api/acehivement/:id
+ * URI: /api/about-me/:id
  *
  * @param {req} req
  * @param {res} res
@@ -134,14 +134,12 @@ const update = asyncWrapper(async (req, res, next) => {
  */
 const destroy = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const result = await deleteAchievementsCertifications(id);
+    const result = await deleteAboutMe(id);
     if (!result.deletedCount) {
-        throw new GeneralError(
-            "Could't delete the Achievements Certifications"
-        );
+        throw new GeneralError("Could't delete the about me");
     }
 
-    res.success(result, 'Achievements Certifications delete successfully.');
+    res.success(result, 'About me delete successfully.');
 });
 
 module.exports = {
